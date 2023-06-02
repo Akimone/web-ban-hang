@@ -1,0 +1,46 @@
+﻿@model BanHoaQuaOnline.Models.TbRole
+
+@{
+    ViewData["Title"] = "Thêm Mới Quyền Truy Cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a asp-area="Admin" asp-controller="AdminRoles" asp-action="Index" class="breadcrumb-item">Danh sách quyền truy cập</a>
+            <span class="breadcrumb-item active">Thêm mới quyền truy cập</span>
+        </nav>
+    </div>
+</div>
+
+
+
+<h4>Thêm mới quyền truy cập</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label"></label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Desciption" class="control-label"></label>
+                <input asp-for="Desciption" class="form-control" />
+                <span asp-validation-for="Desciption" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Thêm mới" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,64 @@
+﻿@model List<BanHoaQuaOnline.ModelsView.CartItem>
+@if (Model != null && Model.Count() > 0)
+{
+<div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+        @foreach (var item in Model)
+        {
+            string url = $"/{item.product.Alias}-{item.product.ProductId}.html";
+          
+			<div class="single-cart-item">
+                <div class="cart-img">
+                    <a href="@url">
+                        <img src="~/images/products/@item.product.Thumb" alt="@item.product.ProductName">
+                        </a>
+                        </div>
+                 
+                <div class="cart-text">
+                    <h5 class="title"><a href="@url">@item.product.ProductName</a></h5>
+                </div>
+            <div class="cart-text-btn">
+                <div class="cart-qty">
+                    
+                      <span class="cart-price">@item.amount x @item.product.Price.Value.ToString("#,##0") VNĐ</span>
+                </div>
+                <button type="button"><i class="ion-trash-b"></i></button>
+            </div>
+        </div>
+           
+        }
+    
+   
+    <div class="cart-price-total d-flex justify-content-between">
+        <h5>Tổng tiền:</h5>
+         <h5>@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</h5>
+    </div>
+    <div class="cart-links d-flex justify-content-center">
+            <a class="obrien-button white-btn" href="cart.html">Giỏ hàng</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+             
+                <a class="obrien-button white-btn" href="/checkout.html">Thanh Toán</a>
+            }
+            else
+            {
+               
+                <a class="obrien-button white-btn" href="/dang-nhap.html?returnUrl=/checkout.html">Thanh Toán</a>
+            }
+           
+       
+    </div>
+</div>
+}
+else
+{
+    <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+                <div class="single-cart-item">
+                <h5>Giỏ hàng rỗng</h5>
+                 </div>
+         
+        <div class="cart-links d-flex justify-content-center">
+            <a class="obrien-button white-btn" href="cart.html">View cart</a>
+            <a class="obrien-button white-btn" href="checkout.html">Checkout</a>
+        </div>
+    </div>
+}

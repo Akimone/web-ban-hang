@@ -1,0 +1,37 @@
+﻿@*@model List<TbOrder>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="myaccount-table table-responsive text-center">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Order</th>
+                    <th>Ngày mua hàng</th>
+                   
+                    <th>Trạng thái</th>
+                    <th>Tổng tiền</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.OrderId</td>
+                        <td>@item.OrderDate</td>
+                     
+                     
+                        <td>@item.TransactStatus.Status</td>
+                        <td>@item.TotalMoney.Value.ToString("#,##0") VNĐ</td>
+                        <td><a href="/" class="btn obrien-button-2 primary-color rounded-0">Xem đơn hàng</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>Chưa có đơn hàng nào</p>
+}*@

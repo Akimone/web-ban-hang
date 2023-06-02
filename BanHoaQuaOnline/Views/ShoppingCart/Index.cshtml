@@ -1,0 +1,187 @@
+﻿@model List<BanHoaQuaOnline.ModelsView.CartItem>
+@{
+    ViewData["Title"] = "Xem giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var returnUrl = Context.Request.Query["ReturnUrl"];
+}
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Shopping Cart</h3>
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li>Giỏ hàng của bạn</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- cart main wrapper start -->
+<div class="cart-main-wrapper mt-no-text mb-no-text">
+    <div class="container container-default-2 custom-area">
+        <div class="row">
+             @if (Model != null && Model.Count() > 0)
+            {
+                <div class="col-lg-12">
+                    <!-- Cart Table Area -->
+                    <div class="cart-table table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">Ảnh sản phẩm</th>
+                                    <th class="pro-title">Tên sản phẩm</th>
+                                    <th class="pro-price">Giá</th>
+                                    <th class="pro-quantity">Số lượng</th>
+                                    <th class="pro-subtotal">Tổng tiền</th>
+                                    <th class="pro-remove">Xóa sản phẩm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="pro-thumbnail"> <a href="~/images/products/@item.product.Thumb">
+                                                    <img class="img-fluid" src="~/images/products/@item.product.Thumb" alt="@item.product.Title">
+                                                </a>
+                                            </td>
+                                            <td class="pro-title"><a href="#">@item.product.ProductName</a></td>
+                                            <td class="pro-price"><span class="amount">@item.product.Price.Value.ToString("#,##0") VNĐ</span></td>
+                                            <td class="pro-quantity">
+                                                <div class="quantity">
+
+                                                    <div class="cart-plus-minus">
+
+                                                        <input class="cartItem cart-plus-minus-box cart-plus-minus" data-mahh="@item.product.ProductId" data-dongia="@item.product.Price" value="@item.amount" min="1" type="number">
+
+                                                    
+                                                 </div>
+                                                </div>
+                                            </td>
+                                            <td class="pro-subtotal"><span class="amount">@item.TotalMoney.ToString("#,##0") VNĐ</span></td>
+                                            <td class="pro-remove"><a href="#" class="removecart" data-mahh="@item.product.ProductId"><i class="ion-trash-b"></i></a></td>
+                                        </tr>
+                                    }
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Cart Update Option -->
+                   
+                </div>
+            }
+            else
+            {
+                <p>Chưa có hàng hóa trong giỏ hàng.Bạn hãy tích cực mua sắm đi nào</p>
+            }
+        </div>
+        <div class="row">
+            <div class="col-lg-5 ml-auto">
+                <!-- Cart Calculation Area -->
+                <div class="cart-calculator-wrapper">
+                    <div class="cart-calculate-items">
+                        <h3>Tổng đơn hàng</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                
+                              
+                                <tr class="total">
+                                    <td>Tổng tiền</td>
+                                    <td class="total-amount">@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/checkout.html" class="btn obrien-button primary-btn d-block">Thanh toán</a>
+                    }
+                    else
+                    {
+                        <a href="/dang-nhap.html?returnUrl=/checkout.html" class="btn obrien-button primary-btn d-block">Thanh toán</a>
+                    }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- cart main wrapper end -->
+<!-- Support Area Start Here -->
+<div class="support-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <div class="support-wrapper d-flex">
+                    <div class="support-content">
+                        <h1 class="title">Cần trợ giúp ?</h1>
+                        <p class="desc-content">Số điện thoại hỗ trợ 24/7 01234-567-890</p>
+                    </div>
+                    <div class="support-button d-flex align-items-center">
+                        <a class="obrien-button primary-btn" asp-controller="Home" asp-action="Contact">Liên hệ với chúng tôi ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Support Area End Here -->
+@section Scripts{
+    <script>
+        $(function () {
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
+            }
+            $(".removecart").click(function () {
+                var productid = $(this).attr("data-mahh");
+                $.ajax({
+                    url: "api/cart/remove",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { productID: productid },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            location.reload();
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Remove Cart Error !")
+                    }
+                });
+            });
+            $(".cartItem").click(function () {
+                var productid = $(this).attr("data-mahh");
+                var soluong = parseInt($(this).val());
+                $.ajax({
+                    url: "api/cart/update",
+                  
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productID: productid,
+                        amount: soluong
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Cập nhật Cart Error !")
+                    }
+                });
+            });
+        });
+    </script>
+}

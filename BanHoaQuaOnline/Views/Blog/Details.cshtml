@@ -1,0 +1,121 @@
+﻿@model BanHoaQuaOnline.Models.TbNews
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string url = $"/tin-tuc/{Model.Alias}-{Model.PostId}.html";
+}
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Tin tức chi tiết </h3>
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li>Chi tiết tin: @Model.Title</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Blog Main Area Start Here -->
+<div class="blog-main-area">
+    <div class="container container-default-2 custom-area">
+        <div class="row flex-row-reverse">
+            <div class="col-12 col-custom mt-no-text">
+                <!-- Blog Details wrapper Area Start -->
+                <div class="blog-post-details">
+                    <figure class="blog-post-thumb mb-5">
+                        <img class="w-100" src="~/images/news/@Model.Thumb" alt="@Model.Title">
+                    </figure>
+                    <section class="blog-post-wrapper product-summery">
+                        <div class="section-content">
+                            <h2 class="title-1 mb-3">@Model.Title</h2>
+                            <p class="mb-4">@Html.Raw(Model.Contents)</p>
+
+                        </div>
+               
+                        <div class="social-share">
+                         
+                        </div>
+                        <div class="comment-area-wrapper mt-5">
+                            <div class="comments-view-area">
+                                <h3 class="mb-5">3 Comments</h3>
+                                <div class="single-comment-wrap mb-4 d-flex">
+                                    <figure class="author-thumb">
+                                        <a href="#">
+                                            <img src="~/assets/images/review/1.jpg" alt="Author">
+                                        </a>
+                                    </figure>
+                                    <div class="comments-info">
+                                        <p class="mb-2">Tin tức thật bổ ích</p>
+                                        <div class="comment-footer d-flex justify-content-between">
+                                            <a href="#" class="author"><strong>Duy</strong> - July 30, 2021</a>
+                                            <a href="#" class="btn-reply"><i class="fa fa-reply"></i> Trả lời</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-comment-wrap mb-4 comment-reply d-flex">
+                                    <figure class="author-thumb">
+                                        <a href="#">
+                                            <img src="~/assets/images/review/1.jpg" alt="Author">
+                                        </a>
+                                    </figure>
+                                    <div class="comments-info">
+                                        <p class="mb-2">Tôi năm nay 70 tuổi mới đọc tin hay như thế này</p>
+                                        <div class="comment-footer d-flex justify-content-between">
+                                            <a href="#" class="author"><strong>Thành</strong> - July 30, 2021</a> <a href="#" class="btn-reply"><i class="fa fa-reply"></i> Trả lời</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-comment-wrap mb-4 d-flex">
+                                    <figure class="author-thumb">
+                                        <a href="#">
+                                            <img src="~/assets/images/review/1.jpg" alt="Author">
+                                        </a>
+                                    </figure>
+                                    <div class="comments-info">
+                                        <p class="mb-2">Hay quá ạ.</p>
+                                        <div class="comment-footer d-flex justify-content-between">
+                                            <a href="#" class="author"><strong>Duy</strong> - July 30, 2021</a>
+                                            <a href="#" class="btn-reply"><i class="fa fa-reply"></i> Trả lời</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Blog Details Wrapper Area End -->
+                <!-- Blog Comments Area Start -->
+                
+                <!-- Blog Comments Area End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Main Area End Here -->
+<!-- Support Area Start Here -->
+<div class="support-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <div class="support-wrapper d-flex">
+                    <div class="support-content">
+                        <h1 class="title">Cần trợ giúp ?</h1>
+                        <p class="desc-content">Số điện thoại hỗ trợ 24/7 01234-567-890</p>
+                    </div>
+                    <div class="support-button d-flex align-items-center">
+                        <a class="obrien-button primary-btn" asp-controller="Home" asp-action="Contact">Liên hệ với chúng tôi ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Support Area End Here -->
+

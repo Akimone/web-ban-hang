@@ -1,0 +1,166 @@
+﻿@model BanHoaQuaOnline.Models.TbNews
+
+@{
+    ViewData["Title"] = "Xóa tin tức" + Model.Title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a asp-area="Admin" asp-controller="AdminTinTucs" asp-action="Index" class="breadcrumb-item">Danh sách tin tức</a>
+            <span class="breadcrumb-item active">Xóa sản phẩm : @Model.Title</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card-body">
+    <h4 class="card-title">Thông tin tin tức : @Model.Title</h4>
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+            <tbody>
+                <tr>
+                    <td>ID:</td>
+                    <td class="text-dark font-weight-semibold">@Model.PostId</td>
+                </tr>
+                <tr>
+                    <td>Tên tiêu đề:</td>
+                    <td>@Model.Title</td>
+                </tr>
+                <tr>
+                    <td>Nội dung ngắn:</td>
+                    <td>@Model.Scontents</td>
+                </tr>
+
+                <tr>
+                    <td>Ngày tạo:</td>
+                    <td>@Model.CreatedDate</td>
+                </tr>
+                <tr>
+                    <td>Alias:</td>
+                    <td>@Model.Alias</td>
+                </tr>
+                <tr>
+                    <td>Người Tạo:</td>
+                    <td>@Model.Author</td>
+                </tr>
+                <tr>
+                    <td>Tags:</td>
+                    <td>@Model.Tags</td>
+                </tr>
+                <tr>
+                    <td>Từ khóa:</td>
+                    <td>@Model.MetaKey</td>
+                </tr>
+                <tr>
+                    <td>Từ khóa mô tả:</td>
+                    <td>@Model.MetaDesc</td>
+                </tr>
+                <tr>
+                    <td>Views:</td>
+                    <td>@Model.Views</td>
+                </tr>
+
+                <tr>
+                    <td>Danh mục:</td>
+                    <td>@Model.CatlId</td>
+                </tr>
+                <tr>
+                    <td>Trạng thái:</td>
+                    <td>
+                        @if (Model.Published)
+                        {
+                            <div class="switch m-r-10">
+                                <input type="checkbox" id="switch-1" checked="" disabled />
+                                <label for="switch-1"></label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="switch m-r-10">
+                                <input type="checkbox" id="switch-1" disabled />
+                                <label for="switch-1"></label>
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tin nóng:</td>
+                    <td>
+                        @if (Model.IsHot)
+                        {
+                            <div class="switch m-r-10">
+                                <input type="checkbox" id="switch-1" checked="" disabled />
+                                <label for="switch-1"></label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="switch m-r-10">
+                                <input type="checkbox" id="switch-1" disabled />
+                                <label for="switch-1"></label>
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tin mới:</td>
+                    <td>
+                        @if (Model.IsNewfeed)
+                        {
+                            <div class="switch m-r-10">
+                                <input type="checkbox" id="switch-1" checked="" disabled />
+                                <label for="switch-1"></label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="switch m-r-10">
+                                <input type="checkbox" id="switch-1" disabled />
+                                <label for="switch-1"></label>
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Danh mục:</td>
+                    <td>@Model.CatlId</td>
+                </tr>
+                <tr>
+                    <td>Ngày tạo:</td>
+                    <td>@Model.CreatedDate</td>
+                </tr>                           
+                <tr>
+                    <td>MetaDesc:</td>
+                    <td>@Model.MetaDesc</td>
+                </tr>
+                <tr>
+                    <td>MetaKey:</td>
+                    <td>@Model.MetaKey</td>
+                </tr>
+                <tr>
+                    <td>Tags:</td>
+                    <td>@Model.Tags</td>
+                </tr>
+                <tr>
+                    <td>Ảnh tin tức:</td>
+                    <td>
+                        <img width="200" height="200" src="~/images/news/@Model.Thumb" alt="@Model.Title" />
+                    </td>
+                </tr>           
+                <tr>
+                    <td>Xác nhận xóa:</td>
+                    <td>
+                        <form asp-controller="AdminTinTucs" asp-action="Delete" asp-route-id="@Model.PostId">
+                            <input type="hidden" asp-for="PostId" />
+                            <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+                        </form>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

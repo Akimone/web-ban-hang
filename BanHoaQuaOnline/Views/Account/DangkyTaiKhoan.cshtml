@@ -1,0 +1,94 @@
+﻿@model BanHoaQuaOnline.ModelsView.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Dang ky Tai Khoan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Đăng kí tài khoản</h3>
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li>Đăng kí tài khoản</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Login Area Start Here -->
+<div class="login-register-area mt-no-text mb-no-text">
+    <div class="container container-default-2 custom-area">
+        <div class="row">
+
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                <div class="login-register-wrapper">
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title-4 mb-2">Đăng Kí Tài khoản</h2>
+                        <p class="desc-content">Please Register using account detail bellow.</p>
+                    </div>
+
+                    <form asp-action="DangkyTaiKhoan">
+                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="single-input-item mb-3">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                            <input type="text" asp-for="FullName" placeholder="Họ Và Tên">
+                        </div>
+                    
+                        <div class="single-input-item mb-3">
+                            <span asp-validation-for="Birday" class="text-danger"></span>
+                            <input type="date" asp-for="Birday" placeholder="Ngày Sinh">
+                        </div>
+                        <div class="single-input-item mb-3">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                            <input type="number" asp-for="Phone"  placeholder="Số Điện Thoại">
+                        </div>
+                        <div class="single-input-item mb-3">
+                             <span asp-validation-for="Email" class="text-danger"></span>
+                            <input type="email" asp-for="Email" placeholder="Email">
+                        </div>
+                        <div class="single-input-item mb-3">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <input type="password" asp-for="Password" placeholder="Mật Khẩu">
+
+                        </div>
+                        <div class="single-input-item mb-3">
+                              <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            <input type="password" asp-for="ConfirmPassword" placeholder="Nhập Lại Mật Khẩu">
+                        </div>
+                        <div class="single-input-item mb-3">
+                            <button  class="btn obrien-button-2 primary-color">Đăng kí tài khoản</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Area End Here -->
+<!-- my account wrapper end -->
+<div class="support-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <div class="support-wrapper d-flex">
+                    <div class="support-content">
+                        <h1 class="title">Cần trợ giúp ?</h1>
+                        <p class="desc-content">Số điện thoại hỗ trợ 24/7 01234-567-890</p>
+                    </div>
+                    <div class="support-button d-flex align-items-center">
+                        <a class="obrien-button primary-btn" asp-controller="Home" asp-action="Contact">Liên hệ với chúng tôi ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Support Area End Here -->

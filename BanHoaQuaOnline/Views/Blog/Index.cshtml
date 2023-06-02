@@ -1,0 +1,129 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<BanHoaQuaOnline.Models.TbNews>
+@{
+    ViewData["Title"] = " Blog Index - " +ViewBag.CurrentPage ;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int Pagecurrent = ViewBag.CurrentPage;
+    int PageNext = Pagecurrent + 1;
+}
+
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Tin nổi bật </h3>
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li>Tin nổi bật</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Blog Main Area Start Here -->
+<div class="blog-main-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-12 col-custom mt-no-text">
+                <!-- Blog Wrapper Start -->
+                <div class="row">
+                    @if(Model != null && Model.Count()>0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            string url = $"/tin-tuc/{item.Alias}-{item.PostId}.html";
+                            <div class="col-lg-4 col-md-6 col-custom mb-4">
+                                <div class="single-blog">
+                                    <div class="single-blog-thumb">
+                                        <a href="@url">
+                                            
+                                            <img src="~/images/news/@item.Thumb" alt="@item.Title" />
+                                        </a>
+                                    </div>
+                                    <div class="single-blog-content position-relative">
+                                        <div class="post-date text-center border d-flex flex-column position-absolute" style="width:85px;">
+                                            <div>@item.CreatedDate.Value.ToShortDateString()</div>                        
+                                        </div>
+                                        <div class="post-meta" style="margin-left:20px;">
+                                            <span class="author">Tác giả: @item.Author</span>
+                                        </div>
+                                        <h2 class="post-title" style="margin-left:20px;">
+                                            <a href="@url">@item.Title</a>
+                                        </h2 >
+                                        <div style ="margin-left:20px;">
+                                        <p class="desc-content" >@Html.Raw(item.Scontents)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+             
+                </div>
+                <!-- Blog Wrapper End -->
+                <!-- Bottom Toolbar Start -->
+                <div class="row mb-no-text">
+                    <div class="col-sm-12 col-custom">
+                        <div class="toolbar-bottom mb-0">
+                            <nav class="pagination pagination-wrap mb-10 mb-sm-0">
+                                <ul class="pagination">
+                                    @if (Pagecurrent > 1)
+                                    {
+                                        <li class="disabled prev">
+                                            <a href="/blogs.html?page=@(Pagecurrent-1)"> <i class="ion-ios-arrow-thin-left"></i></a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                         <li class="disabled prev">
+                                            <a > <i class="ion-ios-arrow-thin-left"></i></a>
+                                        </li>
+                                    }
+                                    <li class="active"><a href="/blogs.html?page=@Pagecurrent">@Pagecurrent</a></li>
+                                    
+                                    <li>
+                                        <a href="/blogs.html?page=@PageNext">@PageNext</a>
+                                    </li>
+                                    <li class="next">
+                                        <a href="/blogs.html?page=@PageNext" title="Tiếp Theo"><i class="ion-ios-arrow-thin-right"></i></a>
+                                    </li>
+
+                                
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Toolbar End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Main Area End Here -->
+<!-- Support Area Start Here -->
+<div class="support-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <div class="support-wrapper d-flex">
+                    <div class="support-content">
+                        <h1 class="title">Cần trợ giúp ?</h1>
+                        <p class="desc-content">Số điện thoại hỗ trợ 24/7 01234-567-890</p>
+                    </div>
+                    <div class="support-button d-flex align-items-center">
+                        <a class="obrien-button primary-btn" asp-controller="Home" asp-action="Contact">Liên hệ với chúng tôi ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Support Area End Here -->
+
+

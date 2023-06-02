@@ -1,0 +1,116 @@
+﻿@model BanHoaQuaOnline.ModelsView.MuaHangSuccessVM
+@{
+    ViewData["Title"] = "Mua hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Thông tin mua hàng</h3>
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li>Thông tin mua hàng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Checkout Area Start Here -->
+<div class="checkout-area">
+    <div class="container container-default-2 custom-container">
+       
+        <div class="row">
+            
+            <div class="col-lg-6 col-12">
+                <div class="your-order">
+                    <h3>Đặt hàng thành công</h3>
+                    <div class="your-order-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-product-name">Mã đơn hàng</th>
+                                    <th class="cart-product-name">Tên khách hàng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                                        <tr class="cart_item">
+                                            <td class="cart-product-name">
+                                                #@Model.DonHangID
+                                            </td>
+                                           <td class="cart-product-name">
+                                                @Model.FullName
+                                            </td>
+                                        </tr>
+                                 
+
+                            </tbody>
+                            <tfoot>
+
+                              
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-accordion">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="#payment-1">
+                                        <h5 class="panel-title mb-2">
+                                            <a href="#" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Thông tin người tin khách hàng.
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body mb-2 mt-2">
+                                            
+                                            <p>Cảm ơn bạn đã đặt hàng</p>
+                                            <br />
+                                            <h3>THÔNG TIN ĐƠN HÀNG</h3>
+                                            <p>Thông tin giao hàng</p>
+                                            <p>Người nhận hàng: @Model.FullName</p>
+                                            <p>Số điện thoại: @Model.Phone</p>
+                                            <p>Địa chỉ: @Model.Address</p>
+                                            <br />
+                                            Để xem chi tiết đơn hàng vui lòng truy cập vào <a asp-controller="Account" asp-action="Dashboard"><strong>Tài khoản cá nhân.</strong></a> Cần hỗ trợ? Liên hệ với chúng tôi qua số điện thoại 0866719363
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Checkout Area End Here -->
+<!-- Support Area Start Here -->
+<div class="support-area">
+    <div class="container container-default custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <div class="support-wrapper d-flex">
+                    <div class="support-content">
+                        <h1 class="title">Need Help ?</h1>
+                        <p class="desc-content">Call our support 24/7 at 01234-567-890</p>
+                    </div>
+                    <div class="support-button d-flex align-items-center">
+                        <a class="obrien-button primary-btn" href="contact-us.html">Contact now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Support Area End Here -->
